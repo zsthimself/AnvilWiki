@@ -36,6 +36,7 @@ pnpm-debug.log*
 
 # Superpowers
 .superpowers/
+.worktrees/
 
 # secrets & local credentials — never commit (incident-earned rule: a leaked
 # key is a dead key; revoke first, clean history second). IndexNow keys are
