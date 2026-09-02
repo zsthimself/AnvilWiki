@@ -63,12 +63,12 @@ import { describe, expect, test } from 'vitest';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const operatorSegments = ['.agents', 'skills', 'anvil-site-operator', 'SKILL.md'];
-const leafSkills = [
-  'anvil-new-article',
-  'anvil-batch-articles',
-  'anvil-update-codes',
-  'anvil-refresh',
-  'anvil-adsense-audit',
+const leafRoutes = [
+  ['One guide or article', 'anvil-new-article'],
+  ['Keyword-list batch', 'anvil-batch-articles'],
+  ['Codes', 'anvil-update-codes'],
+  ['Freshness or stale content', 'anvil-refresh'],
+  ['AdSense readiness or integration', 'anvil-adsense-audit'],
 ] as const;
 const references = ['stage-gates.md', 'evidence-policy.md', 'state-contract.md'] as const;
 
@@ -86,15 +86,12 @@ describe('repository Agent Skills contract', () => {
     expect(frontmatterName(readRepoFile(...operatorSegments))).toBe('anvil-site-operator');
   });
 
-  test('maps every controller route to a real leaf skill with a matching name', () => {
+  test.each(leafRoutes)('routes %s to %s with a matching leaf skill', (request, skill) => {
     const operator = readRepoFile(...operatorSegments);
-
-    for (const skill of leafSkills) {
-      const leafSegments = ['.agent', 'skills', skill, 'SKILL.md'];
-      expect(operator).toContain(`\`${skill}\``);
-      expect(existsSync(repoPath(...leafSegments))).toBe(true);
-      expect(frontmatterName(readRepoFile(...leafSegments))).toBe(skill);
-    }
+    const leafSegments = ['.agent', 'skills', skill, 'SKILL.md'];
+    expect(operator).toContain(`| ${request} | \`${skill}\` |`);
+    expect(existsSync(repoPath(...leafSegments))).toBe(true);
+    expect(frontmatterName(readRepoFile(...leafSegments))).toBe(skill);
   });
 
   test('ships every reference named by the lifecycle operator', () => {
@@ -264,7 +261,7 @@ $env:PATH = 'C:\Users\Administrator\.codex\tmp\anvil-corepack-bin;' + $env:PATH
 & 'C:\Users\Administrator\.codex\tmp\anvil-corepack-bin\pnpm.CMD' exec vitest run tests/agent-skills.test.ts
 ```
 
-Expected: `1 passed` test file and `4 passed` tests, with no failures.
+Expected: `1 passed` test file and `8 passed` tests, with no failures.
 
 - [ ] **Step 6: Verify vendored bytes and excluded development content**
 
@@ -300,7 +297,7 @@ $env:PATH = 'C:\Users\Administrator\.codex\tmp\anvil-corepack-bin;' + $env:PATH
 & 'C:\Users\Administrator\.codex\tmp\anvil-corepack-bin\pnpm.CMD' test
 ```
 
-Expected: 12 test files and 118 tests pass. The previously observed nested-worktree warning about parent `tsconfig.json` may appear; no test failure or new warning is acceptable.
+Expected: 12 test files and 122 tests pass. The previously observed nested-worktree warning about parent `tsconfig.json` may appear; no test failure or new warning is acceptable.
 
 - [ ] **Step 2: Prove the five upstream leaf Skills were not modified**
 
