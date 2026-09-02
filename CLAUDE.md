@@ -12,6 +12,7 @@ Astro 5 + TypeScript + Tailwind CSS 3 + MDX 4 + pnpm 11 + Cloudflare Pages
 <directory>tests/ - Vitest 确定性契约与回归测试</directory>
 <directory>tools/ - 独立的 anvilwiki-ops CLI 与 MCP 工具包（1 子目录：anvil-ops）</directory>
 <config>AGENTS.md - 项目目的、架构边界、命令与 Agent 行为真相源</config>
+<config>.gitignore - 排除依赖、构建产物、凭据与本地隔离 worktree</config>
 <config>package.json - 根工作区脚本、依赖与 v2.7.0 版本声明</config>
 <config>astro.config.ts - Astro 静态输出、路由、i18n 与 sitemap 配置</config>
 <config>pnpm-workspace.yaml - pnpm 11 构建依赖许可边界</config>
