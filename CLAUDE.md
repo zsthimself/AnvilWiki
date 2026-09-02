@@ -3,6 +3,7 @@
 Astro 5 + TypeScript + Tailwind CSS 3 + MDX 4 + pnpm 11 + Cloudflare Pages
 
 <directory>.agent/ - 随上游模板分发的叶子 Agent Skills（1 子目录：skills）</directory>
+<directory>.agents/ - fork 自有的生命周期总控 Agent Skills（1 子目录：skills）</directory>
 <directory>.github/ - GitHub Actions、共享质量门与仓库自动化（2 子目录：actions、workflows）</directory>
 <directory>docs/ - 架构真相源、操作手册与设计决策（2 子目录：handbook、superpowers）</directory>
 <directory>public/ - 静态公开资源、站点清单与广告占位文件</directory>

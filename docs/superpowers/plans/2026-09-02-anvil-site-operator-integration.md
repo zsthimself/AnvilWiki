@@ -73,10 +73,11 @@ const leafSkills = [
 const references = ['stage-gates.md', 'evidence-policy.md', 'state-contract.md'] as const;
 
 const repoPath = (...segments: string[]): string => join(root, ...segments);
-const readRepoFile = (...segments: string[]): string =>
-  readFileSync(repoPath(...segments), 'utf8');
-const frontmatterName = (source: string): string | undefined =>
-  source.match(/^name:\s*([^\r\n]+)$/m)?.[1]?.trim();
+const readRepoFile = (...segments: string[]): string => readFileSync(repoPath(...segments), 'utf8');
+const frontmatterName = (source: string): string | undefined => {
+  const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)?.[1];
+  return frontmatter?.match(/^name:\s*([^\r\n]+)$/m)?.[1]?.trim();
+};
 
 describe('repository Agent Skills contract', () => {
   test('installs the lifecycle operator with the expected frontmatter name', () => {
@@ -280,7 +281,7 @@ Expected: the same four hashes from Step 1 and `False` for the evals path.
 - [ ] **Step 7: Commit the runtime, tests, and GEB maps together**
 
 ```powershell
-git add CLAUDE.md tests/CLAUDE.md tests/agent-skills.test.ts .agents
+git add CLAUDE.md tests/CLAUDE.md tests/agent-skills.test.ts .agents docs/superpowers/plans/2026-09-02-anvil-site-operator-integration.md
 git diff --cached --check
 git commit -m 'feat: add AnvilWiki site operator skill'
 ```
