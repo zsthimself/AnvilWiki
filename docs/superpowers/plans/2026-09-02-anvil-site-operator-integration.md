@@ -50,7 +50,7 @@ Create `tests/agent-skills.test.ts` with exactly this content:
 
 ```typescript
 /**
- * [INPUT]: 依赖仓库内 .agents 总控 Skill、.agent 五个叶子 Skill 与 Node.js fs/path/url
+ * [INPUT]: 依赖仓库内 .agents 总控 Skill、.agent 五个叶子 Skill、Node.js fs/path/url、yaml 的 parse 与 vitest
  * [OUTPUT]: 对外提供总控安装、叶子路由、reference 完整性和缺失叶子停止语义的 Vitest 契约
  * [POS]: tests 的 Agent Skills 跨目录回归门，防止上游改名或 fork 漏文件造成静默路由退化
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
